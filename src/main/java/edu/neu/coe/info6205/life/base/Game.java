@@ -1,5 +1,6 @@
 package edu.neu.coe.info6205.life.base;
 
+import edu.neu.coe.info6205.life.base.Game.Behavior;
 import edu.neu.coe.info6205.life.library.Library;
 
 import java.util.List;
@@ -107,11 +108,27 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 		 * @param args the name of the starting pattern (defaults to "Blip")
 		 */
 		public static void main(String[] args) {
-				String patternName = args.length > 0 ? args[0] : "Blip";
+			//gatwoo
+			long generationNumber = 0l;
+			String bestPattern = "";
+			int count = 0;
+			while(count < 100) {
+				String patternName = GAtwo.use();
 				System.out.println("Game of Life with starting pattern: " + patternName);
-				final String pattern = Library.get(patternName);
-				final Behavior generations = run(0L, pattern);
-				System.out.println("Ending Game of Life after " + generations + " generations");
+				final Behavior generations = run(0L, patternName);
+				System.out.println("Ending Game of Life after " + generations.generation + " generations");
+				if(generations.generation > generationNumber) {
+					generationNumber = generations.generation;
+					bestPattern = patternName;
+				}
+				count++;
+			}	
+			System.out.println("Best start pattern is " + bestPattern);
+//				String patternName = args.length > 0 ? args[0] : "Blip";
+//				System.out.println("Game of Life with starting pattern: " + patternName);
+//				final String pattern = Library.get(patternName);
+//				final Behavior generations = run(0L, pattern);
+//				System.out.println("Ending Game of Life after " + generations + " generations");
 		}
 
 		/**
