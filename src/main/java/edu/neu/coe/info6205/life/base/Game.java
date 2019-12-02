@@ -108,6 +108,10 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 		 * @param args the name of the starting pattern (defaults to "Blip")
 		 */
 		public static void main(String[] args) {
+			//gaone
+			//String bestpattern = GAone.getPattern();
+			//System.out.println("Best start pattern is " + bestPattern);
+			
 			//gatwoo
 			long generationNumber = 0l;
 			String bestPattern = "";
