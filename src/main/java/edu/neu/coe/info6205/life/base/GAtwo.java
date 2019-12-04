@@ -54,6 +54,9 @@ public class GAtwo {
         Genotype<IntegerGene> result = engine.stream()
             .limit(100)
             .collect(EvolutionResult.toBestGenotype());
+//      Phenotype<IntegerGene,Integer>best= engine.stream()
+//		.limit(100)
+//        .collect(EvolutionResult.toBestPhenotype());
         String string = "";
       for (int rank = 0; rank < length; rank++) {
           if (rank != 0 && rank % 2 == 0) {
