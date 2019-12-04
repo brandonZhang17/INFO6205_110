@@ -6,8 +6,20 @@ import java.util.Random;
  
 public class GAone {
 	public static String getPattern() {
-		int row = 10, colnum = 10; 
+		Random random1 = new Random();
+		int number = 1+random1.nextInt(100);
+//		int row = 5, colnum = 5; 
+		int row = number;
+		int colnum = number;
 		int[][] grid = new int[row][colnum];
+		for(int i = 0; i< row; i++) {
+			for(int j = 0; j< colnum; j++) {
+				int number1 = random1.nextInt(number*2);
+				if(number1> number) {
+					grid[i][j] = 1;
+				}
+			}
+		}
 //		int[][] gri = new int[row][colnum];
 //		Random r1 = new Random();
 //		int[][] resultgrid = new int[row][colnum];
@@ -20,27 +32,28 @@ public class GAone {
 //				}
 //			}
 //		}
-		Random r = new Random();
-		Random r1 = new Random();
-		int number1 = r1.nextInt(row-1);
-		int number2 = r1.nextInt(colnum-1);
-		grid[number1][number2]=1;
-		grid[number1][number2+1]=1;
-		grid[number1+1][number2+1]=1;
-		int number3 = 1+ r1.nextInt(row-1);
-		int number4 = r1.nextInt(colnum-2);
-		grid[number3][number4]=1;
-		grid[number3][number4+1]=1;
-		grid[number3-1][number4+1]=1;
-		grid[number3-1][number4+2]=1;
-		int number = 1000;
+//		Random r = new Random();
+//		Random r1 = new Random();
+//		int number1 = r1.nextInt(row-1);
+//		int number2 = r1.nextInt(colnum-1);
+//		grid[number1][number2]=1;
+//		grid[number1][number2+1]=1;
+//		grid[number1+1][number2+1]=1;
+//		int number3 = 1+ r1.nextInt(row-1);
+//		int number4 = r1.nextInt(colnum-2);
+//		grid[number3][number4]=1;
+//		grid[number3][number4+1]=1;
+//		grid[number3-1][number4+1]=1;
+//		grid[number3-1][number4+2]=1;
+//		int number = 1000;
 		//int number = 1;
-		String t = "";
-		while(number>=0) {
+//		String t = "";
+		int count = number;
+		while(count>=0) {
 			grid = nextgrid(grid, row, colnum);
-			number--;
+			count--;
 		}
-		t = genr(grid,row,colnum);
+		String t = genr(grid,row,colnum);
 		return t;
 }
 
@@ -69,16 +82,12 @@ public static int[][] nextgrid(int grid[][], int row, int colnum){
     return nextgeneration;
 }
 //public static void main(String[] args) {
-//	GAone ga = new GAone();
-//	String aa = ga.getPattern();
-//	System.out.println(aa);
+//	System.out.println(GAone.getPattern());
 //}
 public static String genr(int grid[][], int M, int N) {
 	String target = "";
-		 for (int i = 0; i < M; i++) 
-		    { 
-		        for (int j = 0; j < N; j++) 
-		        { 
+		 for (int i = 0; i < M; i++) { 
+		        for (int j = 0; j < N; j++) { 
 		            if (grid[i][j] == 1) {
 		            	if(target=="") {
 		            		target = target + i +" "+ j;
@@ -92,5 +101,6 @@ public static String genr(int grid[][], int M, int N) {
 		 return target;
 	}
 
+	
 } 
    

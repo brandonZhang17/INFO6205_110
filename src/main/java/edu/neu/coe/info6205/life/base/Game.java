@@ -109,8 +109,23 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 		 */
 		public static void main(String[] args) {
 			//gaone
-			//String bestpattern = GAone.getPattern();
-			//System.out.println("Best start pattern is " + bestPattern);
+//			long generationNumber = 0l;
+//			String bestPattern = "";
+//			int count = 0;
+//			while(count<20){
+//				String patternName = GAone.getPattern();
+//				if(patternName!="") {
+//					System.out.println("Game of Life with starting pattern: " + patternName);
+//					final Behavior generations = run(0L, patternName);
+//					System.out.println("Ending Game of Life after " + generations.generation + " generations");
+//					if(generations.generation>generationNumber) {
+//						generationNumber = generations.generation;
+//						bestPattern = patternName;
+//					}
+//					count++;
+//				}
+//			}
+//			System.out.println("Best start pattern is " + bestPattern);
 			
 			//gatwoo
 			long generationNumber = 0l;
