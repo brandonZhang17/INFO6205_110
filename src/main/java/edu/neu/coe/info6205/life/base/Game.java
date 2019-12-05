@@ -119,38 +119,38 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 			
 			//gatwoo
 			
-			long fitness = 0l;
-			String bestPattern = "";
-			int count = 0;
-			while(count < 100) {
-				Phenotype<IntegerGene, Integer> phenotype = GAtwo.use();
-				String string = "";
-				for (int rank = 0; rank < phenotype.getGenotype().getChromosome().length(); rank++) {
-					if (rank != 0 && rank % 2 == 0) {
-		    		  string = string+",";
-					}
-					string = string + phenotype.getGenotype().getChromosome().getGene(rank).intValue();
-					string = string + " ";
-				}
-				String patternName = string;
-				System.out.println("Game of Life with starting pattern: " + patternName);
-				//final Behavior generations = run(0L, patternName);
-				long fitnessnow = fitnessCal(patternName);
-				System.out.println("Ending Game of Life after " + fitnessnow + " generations");
-				if(fitnessnow > fitness) {
-					fitness = fitnessnow;
-					//bestPattern = patternName;
-					bestPattern = string;
-				}
-				System.out.println("Best start pattern is "+ bestPattern+"->"+fitness);
-				count++;
-				
-			}	
-//				String patternName = args.length > 0 ? args[0] : "Blip";
+//			long fitness = 0l;
+//			String bestPattern = "";
+//			int count = 0;
+//			while(count < 100) {
+//				Phenotype<IntegerGene, Integer> phenotype = GAtwo.use();
+//				System.out.println(phenotype);
+//				String string = "";
+//				for (int rank = 0; rank < phenotype.getGenotype().getChromosome().length(); rank++) {
+//					if (rank != 0 && rank % 2 == 0) {
+//		    		  string = string+",";
+//					}
+//					string = string + phenotype.getGenotype().getChromosome().getGene(rank).intValue();
+//					string = string + " ";
+//				}
+//				String patternName = string;
 //				System.out.println("Game of Life with starting pattern: " + patternName);
-//				final String pattern = Library.get(patternName);
-//				final Behavior generations = run(0L, pattern);
-//				System.out.println("Ending Game of Life after " + generations + " generations");
+//				//final Behavior generations = run(0L, patternName);
+//				long fitnessnow = fitnessCal(patternName);
+//				System.out.println("Ending Game of Life after " + fitnessnow + " generations");
+//				if(fitnessnow > fitness) {
+//					fitness = fitnessnow;
+//					//bestPattern = patternName;
+//					bestPattern = string;
+//				}
+//				count++;	
+//			}
+//			System.out.println("Best start pattern is "+ bestPattern+"->"+fitness);
+				String patternName = args.length > 0 ? args[0] : "Blip";
+				System.out.println("Game of Life with starting pattern: " + patternName);
+				final String pattern = Library.get(patternName);
+				final Behavior generations = run(0L, pattern);
+				System.out.println("Ending Game of Life after " + generations + " generations");
 		}
 
 		/**

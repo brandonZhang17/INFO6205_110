@@ -57,7 +57,7 @@ public class GAtwo {
             .collect(EvolutionResult.toBestGenotype());
         
         int count = 0;
-        while(count<1) {
+        while(count<100) {
         	Engine<IntegerGene, Integer> engine1 = Engine
                     .builder(GAtwo::eval, result)
                     .offspringFraction(0.7)
@@ -69,13 +69,19 @@ public class GAtwo {
                     .limit(100)
                     .collect(EvolutionResult.toBestGenotype());
         	count++;
-        	System.out.println("................");
+        	//System.out.println("................");
         }
-
-      Phenotype<IntegerGene, Integer> best = engine.stream()
+        Engine<IntegerGene, Integer> engine2 = Engine
+                .builder(GAtwo::eval, result)
+                .offspringFraction(0.7)
+                .survivorsSelector(new RouletteWheelSelector<>())
+                .offspringSelector(new TournamentSelector<>())
+                .alterers(new SwapMutator<>())
+                .build();
+      Phenotype<IntegerGene, Integer> best = engine2.stream()
     		  .limit(100)
     		  .collect(EvolutionResult.toBestPhenotype());
-       
+       System.out.println(best.toString());
         return best;
     }
 }

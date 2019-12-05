@@ -22,6 +22,7 @@ public class Library {
 		final public static String Glider2 = "2 0, 1 0, 0 0, 0 -1, 1 -2";
 
 		final public static String Glider3 = "0 0, 1 0, 2 0, 2 1, 1 2";
+		final public static String Test = "10 8 ,3 -5 ,10 5 ,-1 1 ,-3 2 ,-5 -6 ,3 -4 ,-10 2 ,-4 -6 ,10 8 ,9 -5 ,6 4 ,9 -3 ,-10 5 ,7 6 ,3 3 ,-4 2 ,-2 -6 ,9 9 ,-6 -1 ,4 10 ,5 10 ,5 5 ,1 10 ,5 -4 ,10 9 ,-10 -2 ,1 -10 ,9 -2 ,-2 -9 ,4 -6 ,7 8 ,-2 4 ,7 -2 ,10 -8 ,5 -4 ,-8 1 ,-9 -6 ,9 -7 ,4 0 ,-5 -6 ,7 5 ,6 3 ,5 -2 ,-1 -9 ,-9 -4";
 
 		final public static Map<String, String> map = new HashMap<>();
 
@@ -43,6 +44,7 @@ public class Library {
 				put("Glider1", Glider1);
 				put("Glider2", Glider2);
 				put("Glider3", Glider3);
+				put("Test", Test);
 				
 		}
 }
