@@ -43,5 +43,6 @@ public class Library {
 				put("Glider1", Glider1);
 				put("Glider2", Glider2);
 				put("Glider3", Glider3);
+				
 		}
 }

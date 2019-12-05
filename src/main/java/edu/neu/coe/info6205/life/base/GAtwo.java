@@ -18,7 +18,10 @@ import io.jenetics.SwapMutator;
 import io.jenetics.TournamentSelector;
 import io.jenetics.engine.Engine;
 import io.jenetics.engine.EvolutionResult;
+import io.jenetics.engine.EvolutionStream;
+import io.jenetics.engine.Limits;
 import io.jenetics.util.Factory;
+import io.jenetics.engine.Limits;
  
 public class GAtwo {
     // 2.) Definition of the fitness function.
@@ -28,7 +31,7 @@ public class GAtwo {
             .intValue();
     }
     
-    public static String use(){
+    public static Phenotype<IntegerGene, Integer> use(){
         // 1.) Define the genotype (factory) suitable
         //     for the problem.
     	Random random = new Random();
@@ -51,20 +54,20 @@ public class GAtwo {
         
         // 4.) Start the execution (evolution) and
         //     collect the result.
-        Genotype<IntegerGene> result = engine.stream()
-            .limit(100)
-            .collect(EvolutionResult.toBestGenotype());
-//      Phenotype<IntegerGene,Integer>best= engine.stream()
-//		.limit(100)
-//        .collect(EvolutionResult.toBestPhenotype());
-        String string = "";
-      for (int rank = 0; rank < length; rank++) {
-          if (rank != 0 && rank % 2 == 0) {
-        	  string = string+",";
-          }
-          string = string + result.getChromosome().getGene(rank).intValue();
-          string = string + " ";
-      }
+//        Genotype<IntegerGene> result = engine.stream()
+//            .limit(100)
+//            .collect(EvolutionResult.toBestGenotype());
+//        String string = "";
+//      for (int rank = 0; rank < length; rank++) {
+//          if (rank != 0 && rank % 2 == 0) {
+//        	  string = string+",";
+//          }
+//          string = string + result.getChromosome().getGene(rank).intValue();
+//          string = string + " ";
+//      }
+      Phenotype<IntegerGene, Integer> result = engine.stream()
+    		  .limit(100)
+    		  .collect(EvolutionResult.toBestPhenotype());
         //System.out.println("Hello World:\n" + result);
         //System.out.println("Hello World:\n" + string);
         
@@ -75,6 +78,6 @@ public class GAtwo {
 //        String s1 = "";
 
         //System.out.println(best.toString());
-        return string;
+        return result;
     }
 }

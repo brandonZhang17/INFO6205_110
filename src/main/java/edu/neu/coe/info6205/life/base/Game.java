@@ -2,6 +2,8 @@ package edu.neu.coe.info6205.life.base;
 
 import edu.neu.coe.info6205.life.base.Game.Behavior;
 import edu.neu.coe.info6205.life.library.Library;
+import io.jenetics.IntegerGene;
+import io.jenetics.Phenotype;
 
 import java.util.List;
 import java.util.Objects;
@@ -128,21 +130,34 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 //			System.out.println("Best start pattern is " + bestPattern);
 			
 			//gatwoo
-			long generationNumber = 0l;
+			long fitness = 0l;
 			String bestPattern = "";
+			Phenotype<IntegerGene, Integer> best = null;
 			int count = 0;
 			while(count < 100) {
-				String patternName = GAtwo.use();
+				Phenotype<IntegerGene, Integer> phenotype = GAtwo.use();
+				String string = "";
+				for (int rank = 0; rank < phenotype.getGenotype().getChromosome().length(); rank++) {
+					if (rank != 0 && rank % 2 == 0) {
+		    		  string = string+",";
+					}
+					string = string + phenotype.getGenotype().getChromosome().getGene(rank).intValue();
+					string = string + " ";
+				}
+				String patternName = string;
 				System.out.println("Game of Life with starting pattern: " + patternName);
 				final Behavior generations = run(0L, patternName);
 				System.out.println("Ending Game of Life after " + generations.generation + " generations");
-				if(generations.generation > generationNumber) {
-					generationNumber = generations.generation;
-					bestPattern = patternName;
+				if(generations.generation > fitness) {
+					fitness = generations.generation;
+					//bestPattern = patternName;
+					bestPattern = string;
+					best = phenotype;
 				}
+				System.out.println("Best start pattern is "+ bestPattern+"->"+fitness);
 				count++;
+				
 			}	
-			System.out.println("Best start pattern is " + bestPattern);
 //				String patternName = args.length > 0 ? args[0] : "Blip";
 //				System.out.println("Game of Life with starting pattern: " + patternName);
 //				final String pattern = Library.get(patternName);
