@@ -10,6 +10,8 @@ import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 public class Game implements Generational<Game, Grid>, Countable, Renderable {
 
 		/**
@@ -102,6 +104,10 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 				long generations = generation - game.generation;
 				return generations > 0 ? growth * 1.0 / generations : -0.1;
 		}
+		public static long fitnessCal(String patternName) {
+			final Behavior generations = run(0L, patternName);
+			return generations.generation;
+		}
 
 		public static final int MaxGenerations = 1000;
 
@@ -110,29 +116,11 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 		 * @param args the name of the starting pattern (defaults to "Blip")
 		 */
 		public static void main(String[] args) {
-			//gaone
-//			long generationNumber = 0l;
-//			String bestPattern = "";
-//			int count = 0;
-//			while(count<20){
-//				String patternName = GAone.getPattern();
-//				if(patternName!="") {
-//					System.out.println("Game of Life with starting pattern: " + patternName);
-//					final Behavior generations = run(0L, patternName);
-//					System.out.println("Ending Game of Life after " + generations.generation + " generations");
-//					if(generations.generation>generationNumber) {
-//						generationNumber = generations.generation;
-//						bestPattern = patternName;
-//					}
-//					count++;
-//				}
-//			}
-//			System.out.println("Best start pattern is " + bestPattern);
 			
 			//gatwoo
+			
 			long fitness = 0l;
 			String bestPattern = "";
-			Phenotype<IntegerGene, Integer> best = null;
 			int count = 0;
 			while(count < 100) {
 				Phenotype<IntegerGene, Integer> phenotype = GAtwo.use();
@@ -146,13 +134,13 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 				}
 				String patternName = string;
 				System.out.println("Game of Life with starting pattern: " + patternName);
-				final Behavior generations = run(0L, patternName);
-				System.out.println("Ending Game of Life after " + generations.generation + " generations");
-				if(generations.generation > fitness) {
-					fitness = generations.generation;
+				//final Behavior generations = run(0L, patternName);
+				long fitnessnow = fitnessCal(patternName);
+				System.out.println("Ending Game of Life after " + fitnessnow + " generations");
+				if(fitnessnow > fitness) {
+					fitness = fitnessnow;
 					//bestPattern = patternName;
 					bestPattern = string;
-					best = phenotype;
 				}
 				System.out.println("Best start pattern is "+ bestPattern+"->"+fitness);
 				count++;

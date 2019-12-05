@@ -49,35 +49,33 @@ public class GAtwo {
             .survivorsSelector(new RouletteWheelSelector<>())
             .offspringSelector(new TournamentSelector<>())
             .alterers(new SwapMutator<>())
-            //.optimize(Optimize.MAXIMUM)
             .build();
         
-        // 4.) Start the execution (evolution) and
-        //     collect the result.
-//        Genotype<IntegerGene> result = engine.stream()
-//            .limit(100)
-//            .collect(EvolutionResult.toBestGenotype());
-//        String string = "";
-//      for (int rank = 0; rank < length; rank++) {
-//          if (rank != 0 && rank % 2 == 0) {
-//        	  string = string+",";
-//          }
-//          string = string + result.getChromosome().getGene(rank).intValue();
-//          string = string + " ";
-//      }
-      Phenotype<IntegerGene, Integer> result = engine.stream()
+        // 4.) Start the execution (evolution) and collect the result.
+        Genotype<IntegerGene> result = engine.stream()
+            .limit(100)
+            .collect(EvolutionResult.toBestGenotype());
+        
+        int count = 0;
+        while(count<1) {
+        	Engine<IntegerGene, Integer> engine1 = Engine
+                    .builder(GAtwo::eval, result)
+                    .offspringFraction(0.7)
+                    .survivorsSelector(new RouletteWheelSelector<>())
+                    .offspringSelector(new TournamentSelector<>())
+                    .alterers(new SwapMutator<>())
+                    .build();
+        	result = engine1.stream()
+                    .limit(100)
+                    .collect(EvolutionResult.toBestGenotype());
+        	count++;
+        	System.out.println("................");
+        }
+
+      Phenotype<IntegerGene, Integer> best = engine.stream()
     		  .limit(100)
     		  .collect(EvolutionResult.toBestPhenotype());
-        //System.out.println("Hello World:\n" + result);
-        //System.out.println("Hello World:\n" + string);
-        
-        
-//        Phenotype<IntegerGene,Integer>best= engine.stream()
-//        		.limit(100)
-//                .collect(EvolutionResult.toBestPhenotype());
-//        String s1 = "";
-
-        //System.out.println(best.toString());
-        return result;
+       
+        return best;
     }
 }
