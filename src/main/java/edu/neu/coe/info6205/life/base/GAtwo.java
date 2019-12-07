@@ -90,7 +90,58 @@ public class GAtwo {
 //       System.out.println(best.toString());
         return best;
     }
-    
+    public static ArrayList<String> ev(String string){
+    	ArrayList<String> result = new ArrayList<>();
+    	ArrayList<Point> list = new ArrayList<>();
+		for (String w : string.split(", *")) {
+			String[] ws = w.split(" ");
+			int x = Integer.parseInt(ws[0]);
+			int y = Integer.parseInt(ws[1]);
+			Point point = new Point(x, y);
+			list.add(point);
+		}
+		int num = 0;
+		while(num<10) {
+			ArrayList<Point> start = list;
+			Random random = new Random();
+			int number = random.nextInt(start.size());
+			Point add1 = new Point(start.get(number).getX()+1, start.get(number).getY()+1);
+			Point add2 = new Point(start.get(number).getX()-1, start.get(number).getY()-1);
+//			Point add3 = new Point(start.get(number).getX()+1, start.get(number).getY()-1);
+//			Point add4 = new Point(start.get(number).getX()-1, start.get(number).getY()+1);
+			while(avoidsame(add1, start)==false&&avoidsame(add2, start)==false) {
+				number = random.nextInt(start.size());
+				add1 = new Point(start.get(number).getX()+1, start.get(number).getY()+1);
+				add2 = new Point(start.get(number).getX()-1, start.get(number).getY()-1);
+//				add3 = new Point(start.get(number).getX()+1, start.get(number).getY()-1);
+//				add4 = new Point(start.get(number).getX()-1, start.get(number).getY()+1);
+			}
+			if(avoidsame(add1, start)==true) {
+				start.add(add1);
+			}
+			if(avoidsame(add2, start)==true) {
+				start.add(add2);
+			}
+//			if(avoidsame(add3, start)==true) {
+//				start.add(add1);
+//			}
+//			if(avoidsame(add4, start)==true) {
+//				start.add(add2);
+//			}
+			String target = "";
+			for(Point p: start) {
+				if(target=="") {
+	        		target = target + p.getX() +" "+ p.getY();
+	        	}else {
+	        		target = target + "," +" "+p.getX()+" "+p.getY();
+	        	}
+			}
+			result.add(target);
+			num++;
+		}
+		return result;
+		
+    }
     public static ArrayList<String> mu(String string) {
     	ArrayList<String> result = new ArrayList<>();
 		ArrayList<Point> save = new ArrayList<>(); 
@@ -103,7 +154,7 @@ public class GAtwo {
 			list.add(point);
 		}
 		int num = 0;
-		while(num<50) {
+		while(num<10) {
 			ArrayList<Point> start = list;
 			ArrayList<Point> orignal = save;
 			Random random = new Random();

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 
@@ -159,22 +160,44 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 				int count1 = 0;
 				while(count1<10) {
 	//				judge(fatherPattern);
-					ArrayList<String> pa = GAtwo.mu(fatherPattern);
-//					while(pa.size()==0) {
-//						pa = GAtwo.mu(fatherPattern);
-//					}
-					HashMap<Long, String> map= select(pa);
-					Long keyuse = 0L;
-					String stringuse="";
-					for(Long key: map.keySet()) {
-						keyuse = key;
-						stringuse = map.get(key);
+					Random random = new Random();
+					int number = random.nextInt(100);
+					if(number<90) {
+						ArrayList<String> pa = GAtwo.mu(fatherPattern);
+//						while(pa.size()==0) {
+//							pa = GAtwo.mu(fatherPattern);
+//						}
+						HashMap<Long, String> map= select(pa);
+						Long keyuse = 0L;
+						String stringuse="";
+						for(Long key: map.keySet()) {
+							keyuse = key;
+							stringuse = map.get(key);
+						}
+						if(keyuse>bestfatherfitness) {
+							bestfatherfitness = keyuse;
+							bestfatherPattern = stringuse;
+						}
+						fatherPattern = stringuse;
+					}else{
+						ArrayList<String> pa = GAtwo.ev(fatherPattern);
+//						while(pa.size()==0) {
+//							pa = GAtwo.mu(fatherPattern);
+//						}
+						HashMap<Long, String> map= select(pa);
+						Long keyuse = 0L;
+						String stringuse="";
+						for(Long key: map.keySet()) {
+							keyuse = key;
+							stringuse = map.get(key);
+						}
+						if(keyuse>bestfatherfitness) {
+							bestfatherfitness = keyuse;
+							bestfatherPattern = stringuse;
+						}
+						fatherPattern = stringuse;
 					}
-					if(keyuse>bestfatherfitness) {
-						bestfatherfitness = keyuse;
-						bestfatherPattern = stringuse;
-					}
-					fatherPattern = stringuse;
+					
 					count1++;
 				}
 				if(bestfatherfitness>fitness) {
