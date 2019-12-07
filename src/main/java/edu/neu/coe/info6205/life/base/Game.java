@@ -11,6 +11,7 @@ import io.jenetics.StochasticUniversalSelector;
 import java.nio.channels.SelectableChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -113,6 +114,9 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 		}
 		public static long fitnessCal(String patternName) {
 			final Behavior generations = run(0L, patternName);
+			if(generations.generation==1000) {
+				bestgroupCal++;
+			}
 			return generations.generation;
 		}
 
@@ -128,6 +132,7 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 				bestPattern = patternName;
 			}
 		}
+		static int bestgroupCal = 0;
 		static long fitness = 0l;
 		static String bestPattern = "";
 		static String bestfather = "";
@@ -141,7 +146,9 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 			
 			//gatwoo
 			int count = 0;
+			HashMap<String, Integer> bestgroup = new HashMap<>();
 			while(count < 10) {
+				bestgroupCal = 0;
 				Phenotype<IntegerGene, Integer> phenotype = GAtwo.use();
 				//System.out.println(phenotype);
 				String string = "";
@@ -152,8 +159,8 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 					string = string + phenotype.getGenotype().getChromosome().getGene(rank).intValue();
 					string = string + " ";
 				}
-				Behavior be = run(0l, string);
-				long bestfatherfitness = be.generation;
+				//Behavior be = run(0l, string);
+				long bestfatherfitness = fitnessCal(string);
 				String bestfatherPattern = string;
 				//long fatherfitness = be.generation;
 				String fatherPattern = string;
@@ -200,6 +207,7 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 					
 					count1++;
 				}
+				
 				if(bestfatherfitness>fitness) {
 					fitness = bestfatherfitness;
 					bestPattern = bestfatherPattern;
@@ -215,11 +223,19 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 //					fitness = fatherfitness;
 //					//bestPattern = patternName;
 //					bestPattern = fatherPattern;
-//				}		
+//				}
+				int n = bestgroupCal;
+				String s = string;
+				bestgroup.put(string,n);
 				count++;	
 			}
+			
 			System.out.println("Best start pattern is "+ bestPattern+"->"+fitness);
 			System.out.println("Best start pattern's ancester is "+bestfather);
+			for(String s: bestgroup.keySet()) {
+				System.out.println(s);
+				System.out.println(bestgroup.get(s));
+			}
 			
 //				String patternName = args.length > 0 ? args[0] : "Blip";
 //				System.out.println("Game of Life with starting pattern: " + patternName);
