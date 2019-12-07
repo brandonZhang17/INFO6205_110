@@ -113,8 +113,13 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 				return generations > 0 ? growth * 1.0 / generations : -0.1;
 		}
 		public static long fitnessCal(String patternName) {
+			System.out.println("Game of Life with starting pattern: " + patternName);
 			final Behavior generations = run(0L, patternName);
-			if(generations.generation==1000) {
+			System.out.println("Ending Game of Life after " + generations.generation + " generations");
+//			if(generations.generation==1000) {
+//				bestgroupCal++;
+//			}
+			if(generations.generation==1000&&generations.growth>=0.1&&generations.growth<=0.25) {
 				bestgroupCal++;
 			}
 			return generations.generation;
@@ -134,6 +139,7 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 		}
 		static int bestgroupCal = 0;
 		static long fitness = 0l;
+		static double growthrateofbestpattern = 0;
 		static String bestPattern = "";
 		static String bestfather = "";
 		
