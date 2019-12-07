@@ -24,7 +24,15 @@ public class GameTest {
 				final Game.Behavior generations = Game.run(0L, pattern);
 				assertEquals(new Game.Behavior(2, 0, 1), generations);
 		}
-
+		@Test
+		public void testfitness() {
+			String p =  "Glider3" ;
+			final String pString = Library.get(p);
+			final long fitness = Game.fitnessCal(pString);
+			assertEquals(9L, fitness);
+			
+		}
+		
 		@Test
 		public void generation() {
 				// TODO implement test
