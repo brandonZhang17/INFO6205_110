@@ -28,25 +28,23 @@ import io.jenetics.util.Factory;
 import static io.jenetics.engine.Limits.bySteadyFitness;
 
 public class GAtwo {
-    // 2.) Definition of the fitness function.
     private static int eval(Genotype<IntegerGene> gt) {
         return gt.getChromosome()
             .as(IntegerChromosome.class)
             .intValue();
     }
-    
+    //generte random phenotype
     public static Phenotype<IntegerGene, Integer> use(){
-        // 1.) Define the genotype (factory) suitable
-        //     for the problem.
     	Random random = new Random();
     	int length = 4+random.nextInt(31);
         while (length%2 != 0) {
             length = 4+random.nextInt(31);
         }
+        //random length from(4,34)
         Factory<Genotype<IntegerGene>> gtf =
             Genotype.of(IntegerChromosome.of(-10,10,length));
         
-        // 3.) Create the execution environment.
+        // Create the execution environment.
         Engine<IntegerGene, Integer> engine = Engine
             .builder(GAtwo::eval, gtf)
             .optimize(Optimize.MAXIMUM)
@@ -56,7 +54,6 @@ public class GAtwo {
             .alterers(new SwapMutator<>())
             .build();
         
-        // 4.) Start the execution (evolution) and collect the result.
 //        Genotype<IntegerGene> result = engine.stream()
 //            .limit(100)
 //            .collect(EvolutionResult.toBestGenotype());
