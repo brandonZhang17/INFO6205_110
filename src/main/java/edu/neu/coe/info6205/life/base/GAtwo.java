@@ -1,5 +1,6 @@
 package edu.neu.coe.info6205.life.base;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -38,9 +39,9 @@ public class GAtwo {
         // 1.) Define the genotype (factory) suitable
         //     for the problem.
     	Random random = new Random();
-    	int length = 2+random.nextInt(31);
+    	int length = 4+random.nextInt(31);
         while (length%2 != 0) {
-            length = 2+random.nextInt(31);
+            length = 4+random.nextInt(31);
         }
         Factory<Genotype<IntegerGene>> gtf =
             Genotype.of(IntegerChromosome.of(-10,10,length));
@@ -90,42 +91,52 @@ public class GAtwo {
         return best;
     }
     
-    public static String mu(String string) {
-		ArrayList<Point> result = new ArrayList<>(); 
-    	ArrayList<Point> start = new ArrayList<>();
+    public static ArrayList<String> mu(String string) {
+    	ArrayList<String> result = new ArrayList<>();
+		ArrayList<Point> save = new ArrayList<>(); 
+    	ArrayList<Point> list = new ArrayList<>();
 		for (String w : string.split(", *")) {
 			String[] ws = w.split(" ");
 			int x = Integer.parseInt(ws[0]);
 			int y = Integer.parseInt(ws[1]);
 			Point point = new Point(x, y);
-			start.add(point);
+			list.add(point);
 		}
-		Random random = new Random();
-		int number = random.nextInt(start.size());
-		for(int i = 0; i< number;i++) {
-			int number1 = random.nextInt(start.size());
-			Point point1 = start.get(number1);
-			Point point1new = new Point(point1.getY(), point1.getX());
-			start.remove(number1);
-			if(avoidsame(point1new, result)==true) {
-				result.add(point1new);
+		int num = 0;
+		while(num<50) {
+			ArrayList<Point> start = list;
+			ArrayList<Point> orignal = save;
+			Random random = new Random();
+			int number = random.nextInt(start.size());
+			for(int i = 0; i< number;i++) {
+				int number1 = random.nextInt(start.size());
+				Point point1 = start.get(number1);
+				Point point1new = new Point(point1.getY(), point1.getX());
+				start.remove(number1);
+				if(avoidsame(point1new, save)==true) {
+					orignal.add(point1new);
+				}
 			}
-		}
-		for(Point p: start) {
-			if(avoidsame(p, result)==true) {
-				result.add(p);
+			for(Point p: start) {
+				if(avoidsame(p, save)==true) {
+					orignal.add(p);
+				}
 			}
+			String target = "";
+			for(Point p: save) {
+				if(target=="") {
+	        		target = target + p.getX() +" "+ p.getY();
+	        	}else {
+	        		target = target + "," +" "+p.getX()+" "+p.getY();
+	        	}
+			}
+			result.add(target);
+			num++;
 		}
-		String target = "";
-		for(Point p: result) {
-			if(target=="") {
-        		target = target + p.getX() +" "+ p.getY();
-        	}else {
-        		target = target + "," +" "+p.getX()+" "+p.getY();
-        	}
-		}
+		
+		
 
-		return target;
+		return result;
 	}
 	
 	private static boolean avoidsame(Point point1new, ArrayList<Point> result) {

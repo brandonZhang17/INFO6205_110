@@ -8,6 +8,9 @@ import io.jenetics.Optimize;
 import io.jenetics.Phenotype;
 import io.jenetics.StochasticUniversalSelector;
 
+import java.nio.channels.SelectableChannel;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.BiConsumer;
@@ -126,6 +129,8 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 		}
 		static long fitness = 0l;
 		static String bestPattern = "";
+		static String bestfather = "";
+		
 
 		/**
 		 * Main program for Game of Life.
@@ -135,7 +140,7 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 			
 			//gatwoo
 			int count = 0;
-			while(count < 100) {
+			while(count < 10) {
 				Phenotype<IntegerGene, Integer> phenotype = GAtwo.use();
 				//System.out.println(phenotype);
 				String string = "";
@@ -146,32 +151,76 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 					string = string + phenotype.getGenotype().getChromosome().getGene(rank).intValue();
 					string = string + " ";
 				}
-				String patternName = string;
+				Behavior be = run(0l, string);
+				long bestfatherfitness = be.generation;
+				String bestfatherPattern = string;
+				//long fatherfitness = be.generation;
+				String fatherPattern = string;
 				int count1 = 0;
-				while(count1<100) {
-					judge(patternName);
-					String pa = GAtwo.mu(patternName);
-					patternName = pa;
+				while(count1<10) {
+	//				judge(fatherPattern);
+					ArrayList<String> pa = GAtwo.mu(fatherPattern);
+//					while(pa.size()==0) {
+//						pa = GAtwo.mu(fatherPattern);
+//					}
+					HashMap<Long, String> map= select(pa);
+					Long keyuse = 0L;
+					String stringuse="";
+					for(Long key: map.keySet()) {
+						keyuse = key;
+						stringuse = map.get(key);
+					}
+					if(keyuse>bestfatherfitness) {
+						bestfatherfitness = keyuse;
+						bestfatherPattern = stringuse;
+					}
+					fatherPattern = stringuse;
 					count1++;
 				}
-				System.out.println("Game of Life with starting pattern: " + patternName);
-				//final Behavior generations = run(0L, patternName);
-				long fitnessnow = fitnessCal(patternName);
-				System.out.println("Ending Game of Life after " + fitnessnow + " generations");
-				if(fitnessnow > fitness) {
-					fitness = fitnessnow;
-					//bestPattern = patternName;
-					bestPattern = patternName;
-				}		
+				if(bestfatherfitness>fitness) {
+					fitness = bestfatherfitness;
+					bestPattern = bestfatherPattern;
+					bestfather = string;
+					
+				}
+				
+//				System.out.println("Game of Life with starting pattern: " + patternName);
+//				//final Behavior generations = run(0L, patternName);
+//				long fitnessnow = fitnessCal(patternName);
+//				System.out.println("Ending Game of Life after " + fitnessnow + " generations");
+//				if(fatherfitness > fitness) {
+//					fitness = fatherfitness;
+//					//bestPattern = patternName;
+//					bestPattern = fatherPattern;
+//				}		
 				count++;	
 			}
 			System.out.println("Best start pattern is "+ bestPattern+"->"+fitness);
+			System.out.println("Best start pattern's ancester is "+bestfather);
 			
 //				String patternName = args.length > 0 ? args[0] : "Blip";
 //				System.out.println("Game of Life with starting pattern: " + patternName);
 //				final String pattern = Library.get(patternName);
 //				final Behavior generations = run(0L, pattern);
 //				System.out.println("Ending Game of Life after " + generations + " generations");
+		}
+
+		private static HashMap<Long, String>select(ArrayList<String> pa) {
+			HashMap<Long, String> map = new HashMap<>();
+			// TODO Auto-generated method stub
+			long fitnessrightnow = 0L;
+			String child = "";
+			for(String string: pa) {
+				long fitnesschild = fitnessCal(string);
+				if( fitnesschild>fitnessrightnow) {
+					fitnessrightnow = fitnesschild;
+					//bestPattern = patternName;
+					child = string;
+				}
+				
+			}
+			map.put(fitnessrightnow, child);
+			return  map;
 		}
 
 		/**
