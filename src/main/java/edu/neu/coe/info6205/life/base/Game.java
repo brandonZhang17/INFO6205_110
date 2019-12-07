@@ -124,6 +124,18 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 			}
 			return generations.generation;
 		}
+//		public static  fitnessCal(String patternName) {
+//			System.out.println("Game of Life with starting pattern: " + patternName);
+//			final Behavior generations = run(0L, patternName);
+//			System.out.println("Ending Game of Life after " + generations.generation + " generations");
+////			if(generations.generation==1000) {
+////				bestgroupCal++;
+////			}
+//			if(generations.generation==1000&&generations.growth>=0.1&&generations.growth<=0.25) {
+//				bestgroupCal++;
+//			}
+//			return generations.generation;
+//		}
 
 		public static final int MaxGenerations = 1000;
 		public static void judge(String patternName) {
@@ -232,7 +244,7 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 //				}
 				int n = bestgroupCal;
 				String s = string;
-				bestgroup.put(string,n);
+				bestgroup.put(s,n);
 				count++;	
 			}
 			
@@ -250,7 +262,7 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 //				System.out.println("Ending Game of Life after " + generations + " generations");
 		}
 
-		private static HashMap<Long, String>select(ArrayList<String> pa) {
+		public static HashMap<Long, String>select(ArrayList<String> pa) {
 			HashMap<Long, String> map = new HashMap<>();
 			// TODO Auto-generated method stub
 			long fitnessrightnow = 0L;
