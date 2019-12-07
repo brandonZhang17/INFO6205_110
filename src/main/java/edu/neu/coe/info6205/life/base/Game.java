@@ -154,7 +154,7 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 			int count = 0;
 			HashMap<String, Integer> bestgroup = new HashMap<>();
 			// inital some start random pattern 
-			while(count < 10) {
+			while(count < 25){
 				bestgroupCal = 0;
 				Phenotype<IntegerGene, Integer> phenotype = GAtwo.use();
 				//System.out.println(phenotype);
@@ -178,7 +178,7 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 					Random random = new Random();
 					int number = random.nextInt(100);
 					//choose mutation method or evolution method
-					if(number<90) {
+					if(number<50) {
 						ArrayList<String> pa = GAtwo.mu(fatherPattern);
 //						while(pa.size()==0) {
 //							pa = GAtwo.mu(fatherPattern);

@@ -1,9 +1,13 @@
 package edu.neu.coe.info6205.life.base;
 
 import edu.neu.coe.info6205.life.library.Library;
+import io.jenetics.IntegerGene;
+import io.jenetics.Phenotype;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,7 +55,27 @@ public class GameTest {
 			}
 			assertEquals("0 0, 1 0, 2 0, 2 1, 1 2", result);
 		}
-		
+		@Test
+		public void testExpression() {
+			Phenotype<IntegerGene, Integer> phenotype = GAtwo.use();
+			String String1 = phenotype.toString();
+			String String2 = phenotype.getGenotype().toString();
+			assertTrue(String1!=String2);
+		}
+		@Test
+		public void testmutation() {
+			String p =  "Glider3" ;
+			final String pString = Library.get(p);
+			ArrayList<String>coun = GAtwo.mu(pString);
+			assertTrue(coun.size()!=0);
+		}
+		@Test
+		public void testevolution() {
+			String p =  "Glider3" ;
+			final String pString = Library.get(p);
+			ArrayList<String>coun = GAtwo.ev(pString);
+			assertTrue(coun.size()!=0);
+		}
 		@Test
 		public void generation() {
 				// TODO implement test
