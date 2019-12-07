@@ -112,6 +112,7 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 				long generations = generation - game.generation;
 				return generations > 0 ? growth * 1.0 / generations : -0.1;
 		}
+		//method to calculate fitness
 		public static long fitnessCal(String patternName) {
 			System.out.println("Game of Life with starting pattern: " + patternName);
 			final Behavior generations = run(0L, patternName);
@@ -124,31 +125,19 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 			}
 			return generations.generation;
 		}
-//		public static  fitnessCal(String patternName) {
-//			System.out.println("Game of Life with starting pattern: " + patternName);
-//			final Behavior generations = run(0L, patternName);
-//			System.out.println("Ending Game of Life after " + generations.generation + " generations");
-////			if(generations.generation==1000) {
-////				bestgroupCal++;
-////			}
-//			if(generations.generation==1000&&generations.growth>=0.1&&generations.growth<=0.25) {
-//				bestgroupCal++;
-//			}
-//			return generations.generation;
-//		}
 
 		public static final int MaxGenerations = 1000;
-		public static void judge(String patternName) {
-			System.out.println("Game of Life with starting pattern: " + patternName);
-			//final Behavior generations = run(0L, patternName);
-			long fitnessnow = fitnessCal(patternName);
-			System.out.println("Ending Game of Life after " + fitnessnow + " generations");
-			if(fitnessnow > fitness) {
-				fitness = fitnessnow;
-				//bestPattern = patternName;
-				bestPattern = patternName;
-			}
-		}
+//		public static void judge(String patternName) {
+//			System.out.println("Game of Life with starting pattern: " + patternName);
+//			//final Behavior generations = run(0L, patternName);
+//			long fitnessnow = fitnessCal(patternName);
+//			System.out.println("Ending Game of Life after " + fitnessnow + " generations");
+//			if(fitnessnow > fitness) {
+//				fitness = fitnessnow;
+//				//bestPattern = patternName;
+//				bestPattern = patternName;
+//			}
+//		}
 		static int bestgroupCal = 0;
 		static long fitness = 0l;
 		static double growthrateofbestpattern = 0;
@@ -161,10 +150,10 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 		 * @param args the name of the starting pattern (defaults to "Blip")
 		 */
 		public static void main(String[] args) {
-			
-			//gatwoo
+			//use GA 
 			int count = 0;
 			HashMap<String, Integer> bestgroup = new HashMap<>();
+			// inital some start random pattern 
 			while(count < 10) {
 				bestgroupCal = 0;
 				Phenotype<IntegerGene, Integer> phenotype = GAtwo.use();
@@ -183,10 +172,12 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 				//long fatherfitness = be.generation;
 				String fatherPattern = string;
 				int count1 = 0;
+				//generate offspring
 				while(count1<10) {
 	//				judge(fatherPattern);
 					Random random = new Random();
 					int number = random.nextInt(100);
+					//choose mutation method or evolution method
 					if(number<90) {
 						ArrayList<String> pa = GAtwo.mu(fatherPattern);
 //						while(pa.size()==0) {
@@ -225,7 +216,7 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 					
 					count1++;
 				}
-				
+				//save best
 				if(bestfatherfitness>fitness) {
 					fitness = bestfatherfitness;
 					bestPattern = bestfatherPattern;
@@ -261,7 +252,8 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 //				final Behavior generations = run(0L, pattern);
 //				System.out.println("Ending Game of Life after " + generations + " generations");
 		}
-
+		
+		// select method
 		public static HashMap<Long, String>select(ArrayList<String> pa) {
 			HashMap<Long, String> map = new HashMap<>();
 			// TODO Auto-generated method stub

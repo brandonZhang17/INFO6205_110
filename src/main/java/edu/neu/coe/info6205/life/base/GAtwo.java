@@ -90,6 +90,8 @@ public class GAtwo {
 //       System.out.println(best.toString());
         return best;
     }
+    
+    // evolution method
     public static ArrayList<String> ev(String string){
     	ArrayList<String> result = new ArrayList<>();
     	ArrayList<Point> list = new ArrayList<>();
@@ -142,6 +144,8 @@ public class GAtwo {
 		return result;
 		
     }
+    
+    // mutation method
     public static ArrayList<String> mu(String string) {
     	ArrayList<String> result = new ArrayList<>();
 		ArrayList<Point> save = new ArrayList<>(); 
@@ -190,6 +194,7 @@ public class GAtwo {
 		return result;
 	}
 	
+    // deduplication
 	private static boolean avoidsame(Point point1new, ArrayList<Point> result) {
 		// TODO Auto-generated method stub
 		for(Point p: result) {
