@@ -138,7 +138,9 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 //				bestPattern = patternName;
 //			}
 //		}
+		//amount of satisfactory pattern
 		static int bestgroupCal = 0;
+		
 		static long fitness = 0l;
 		static double growthrateofbestpattern = 0;
 		static String bestPattern = "";
