@@ -242,7 +242,7 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 			}
 			
 			System.out.println("Best start pattern is "+ bestPattern+"->"+fitness);
-			System.out.println("Best start pattern's ancester is "+bestfather);
+			System.out.println("Best start pattern's ancestor is "+bestfather);
 			for(String s: bestgroup.keySet()) {
 				System.out.println(s);
 				System.out.println(bestgroup.get(s));
