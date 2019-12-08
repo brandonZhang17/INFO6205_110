@@ -1,4 +1,4 @@
-# INFO6205_Team_111
+# INFO6205_Team_110
 
 Northeastern University Information Systems INFO6205 Final Project.
 
@@ -12,12 +12,12 @@ Northeastern University Information Systems INFO6205 Final Project.
 
 ## Introduction
 
-In computer science and operations research, a genetic al- gorithm (GA) is a metaheuristic inspired by the process of natural selection that belongs to the larger class of evolu- tionary algorithms (EA). Genetic algorithms are commonly used to generate high-quality solutions to optimization and search problems by relying on bio-inspired operators such as mutation, crossover and selection. The goal of the project is to look into a Paramecium(graphic) Genetic prob- lem analogy and find the best solution to the problem.
-
+In computer science and operations research, a genetic algorithm (GA) is a me-taheuristic inspired by the process of natural selection that belongs to the larger class of evolutionary algorithms (EA). Genetic algorithms are commonly used to generate high-quality solutions to optimization and search problems by relying on bio-inspired operators such as mutation, crossover and selection. The goal of the project is to find the best solution to the Genetic problem.
 
 ## Background
 
-In this case, we are aiming at applying Genetic algorithm to find the best genotype. We should select the best non-mu- tation genotype from the original population at first. Then use the most “longevity” individual in the original popula- tion as the starting pattern of the evolution with gene muta- tion. Do the evolution process in the same nature environ- ment (i.e the same evolution method and termination algo- rithm) can find the best genotype and do the same process recursively.
+In this project, we need to apply Genetic algorithm to find the best pattern.
+In the processing of constructing “Evolution” model, we build the starting pattern and offspring, genotypes, expressions, and environment in the genetic algorithm. Then, we design the fitness calculation algorithm, the selection algorithm, the and the mutation algorithm Finally, we can get the best pattern.
 
 ## API
 
@@ -25,10 +25,10 @@ In this case, we are aiming at applying Genetic algorithm to find the best genot
 
 ## Result
 
-Please see it on report.
+Please see it on report and our data analysis1 and data analysis2.
 
 
 ## Contributor
 
-[@Jianchao_Li_001054645](https://github.com/ljch9725)
-[@Jingwen_Wang_001052378](https://github.com/Jingwen-Wang-97)
+[@JXIwen Zhang_001087575(https://github.com/XiwenZhang0612)
+
