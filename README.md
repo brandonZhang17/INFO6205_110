@@ -29,6 +29,6 @@ Please see it on report and our data analysis1 and data analysis2.
 
 
 ## Contributor
-
+@Zhiwei_Zhang_001821837(https://github.com/brandonZhang17)
 [@JXIwen Zhang_001087575(https://github.com/XiwenZhang0612)
 
